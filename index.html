@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
     <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/ionicons.css">
     <link rel="stylesheet" href="css/theme/custom.css" id="theme">
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -29,10 +30,109 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h1>Side Project Story: theia</h1>
+          <h1>Side Project Story:
+            <span class="yellow">theia</span>
+          </h1>
         </section>
         <section>
-          <h2>Preface: How npm works</h2>
+          <h2>Node & npm</h2>
+          <ul>
+            <li><i class="yellow icon ion-document"></i> Package.json</li>
+            <li><i class=" yellow icon ion-folder"></i> Local node_modules</li>
+            <li><i class="yellow icon ion-filing"></i> Global node_modules</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Sample Package.json</h2>
+          <aside class="notes">
+          Talk about how using npm works and how forgetting to add to package.json is common and annoying.
+            Go to console, and show what happens when error occurs.
+          </aside>
+          <pre>
+            <code data-trim>
+              {
+                "name": "gulp",
+                "description": "The streaming build system",
+                "version": "3.8.11",
+                "homepage": "http://gulpjs.com",
+                "repository": "gulpjs/gulp",
+                "author": "Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
+                "tags": [
+                  "build",
+                  "stream",
+                  "system",
+                  "make",
+                  "tool",
+                  "asset",
+                  "pipeline"
+                ],
+                "files": [
+                  "index.js",
+                  "lib",
+                  "bin",
+                  "completion"
+                ],
+                "bin": {
+                  "gulp": "./bin/gulp.js"
+                },
+                "man": "gulp.1",
+                "dependencies": {
+                  "archy": "^1.0.0",
+                  "chalk": "^1.0.0",
+                  "deprecated": "^0.0.1",
+                  "gulp-util": "^3.0.0",
+                  "interpret": "^0.5.0",
+                  "liftoff": "^2.0.1",
+                  "minimist": "^1.1.0",
+                  "orchestrator": "^0.3.0",
+                  "pretty-hrtime": "^1.0.0",
+                  "semver": "^4.1.0",
+                  "tildify": "^1.0.0",
+                  "v8flags": "^2.0.2",
+                  "vinyl-fs": "^0.3.0"
+                },
+                "devDependencies": {
+                  "coveralls": "^2.7.0",
+                  "graceful-fs": "^3.0.0",
+                  "istanbul": "^0.3.0",
+                  "jscs": "~1.11.3",
+                  "jshint": "^2.5.0",
+                  "jshint-stylish": "^1.0.0",
+                  "marked-man": "^0.1.3",
+                  "mkdirp": "^0.5.0",
+                  "mocha": "^2.0.1",
+                  "mocha-lcov-reporter": "^0.0.1",
+                  "q": "^1.0.0",
+                  "rimraf": "^2.2.5",
+                  "should": "^5.0.1"
+                },
+                "scripts": {
+                  "prepublish": "marked-man --name gulp docs/CLI.md > gulp.1",
+                  "lint": "jshint lib bin test index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules && jscs lib bin test index.js",
+                  "test": "npm run-script lint && mocha --reporter spec",
+                  "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+                },
+                "engines": {
+                  "node": ">= 0.9"
+                },
+                "license": "MIT"
+              }
+            </code>
+          </pre>
+        </section>
+        <section>
+          <pre>
+            <code>
+            var archy = require('archy');
+            var coveralls = require('coveralls');
+            </code>
+          </pre>
+          <pre>
+            <code>
+            npm install --save archy
+            npm install --save-dev coveralls
+            </code>
+          </pre>
         </section>
         <section>
           <h2>Idea</h2>
@@ -42,6 +142,7 @@
         <section>
           <h2>Simple Game Plan</h2>
           <img src="images/wunderlist.png" height="401" width="715" alt="">
+          <img src="images/files.png" height="145" width="564" alt="">
         </section>
         <section>
           <h2>More Elaborate Game Plan</h2>
@@ -63,53 +164,77 @@
           <img src="images/6a00d8341ca4d953ef01a511e114a3970c.png" alt="">
         </section>
         <section>
-          <h2>3 Steps forward, 1 step back</h2>
-          <p>(Note to self: show code example here?)</p>
+          <h2>Refactor often, as you go.</h2>
+          <p>"3 steps forward, 1 step back"</p>
+          <a href="https://github.com/wzaghal/theia/commits/master?page=2">Commit history</a>
         </section>
         <section>
           <h2>New features vs necessary improvements</h2>
+          <aside class="notes">explain scope creep and how companies HATE clients who have it and find ways to eliminate it.
+          This case is tricky because you're also the client.</aside>
           <ul>
             <li class="fragment">ES6?</li>
-            <li class="fragment">Front-end?</li>
-            <li class="fragment">showing line numbers, duplicate requires</li>
-            <li class="fragment">New promise library?</li>
-            <li class="fragment"> --save-dev --save choose option </li>
-            <li class="fragment"> </li>
+            <li class="fragment">Front-end component?</li>
+            <li class="fragment">Detect & display line numbers</li>
+            <li class="fragment">Detect & display multiple requires</li>
+            <li class="fragment">Detect and allow users to add version number</li>
+            <li class="fragment">More powerful promise library?</li>
+            <li class="yellow fragment"> --save-dev --save choose option </li>
+            <li class="yellow fragment">Avoid node_modules directory</li>
+            <li class="fragment">Avoid all .gitignore files</li>
+
           </ul>
         </section>
         <section>
-          <h2>Staying motivated - reminding yourself why youre doing this</h2>
+          <h2>Staying Motivated</h2>
+          <aside class="notes">You shared with a colleague who said this would be better as an Eslint tool. After some thought, you realized he's right it would make a better tool as Eslint.
+
+          Criticism referencing version number, saying he wouldn't use it very often.
+
+          Found out it exists already. 2 years ago.
+
+          I had a mental image of why I was doing this:
+          - learn
+          - have fun
+          - create a solution to a problem I and others found tough.
+          - not too concerned with popularity, otherwise I might have pivoted.
+          - not too concerned about originality.
+          </aside>
           <ul>
-            <li class="fragment">eslint tool</li>
-            <li class="fragment">criticism</li>
-            <li class="fragment">existing tool</li>
+          <p class="yellow">Why Am I Doing This Again?</p>
           </ul>
         </section>
         <section>
-          <h2>When to say TTFN</h2>
+          <h2>Know when it's time to say goodbye (for now)</h2>
+          <aside class="notes">Commits got lighter, more and more refactoring, commenting etc. It was becomming clear I was done.
+          Go to commits and show April 25th commits onwards.
+          </aside>
         </section>
         <section>
           <h2>npm Publish</h2>
         </section>
         <section>
-          <h2>demo</h2>
+          <h2>Demo</h2>
         </section>
         <section>
-          <h2>Everyone's got their own way of making a side project</h2>
-        </section>
-        <section>
-          <h2>What worked for me:</h2>
+          <h2>The Process I followed And Recommend:</h2>
+          <aside class="notes">People are different and this approach may not be ideal for everytone.</aside>
           <ul>
             <li class="fragment">Simple plan with a goal + exit strategy</li>
             <li class="fragment">Add more 'sub-goals'</li>
             <li class="fragment">Grow incrementally</li>
             <li class="fragment">Way to define and measure success - commit a day</li>
             <li class="fragment">Handled Scope Creep</li>
-            <li class="fragment">Understood it was a rocky road</li>
-            <li class="fragment">Handled pessimism/negativitys</li>
-            <li class="fragment">Knew when to say goodbye</li>
+            <li class="fragment">Understand it's a rocky road</li>
+            <li class="fragment">Handled pessimism/negativity by reminding yourself why you are doing this</li>
+            <li class="fragment">Know when to say goodbye</li>
           </ul>
         </section>
+        <section>
+        <h1>Thank You!</h1>
+        <h4>Any Questions?</h4>
+        </section>
+
       </div>
     </div>
     <script src="lib/js/head.min.js"></script>

@@ -123,7 +123,7 @@
           </pre>
         </section>
         <section>
-        <h2>Sample Code</h2>
+          <h2>Sample Code</h2>
           <pre>
             <code>
             var archy = require('archy');
@@ -150,14 +150,45 @@
         <section>
           <h2>More Elaborate Game Plan</h2>
           <ul>
-            <li class="fragment">Functional Programming</li>
-            <li class="fragment">Good Project Structure</li>
-            <li class="fragment">Unit tests & Continuous Integration Tool</li>
-            <li class="fragment">Publish to npm</li>
-            <li class="fragment">Linted & Beautified</li>
-            <li class="fragment">Promises across the board</li>
-            <li class="fragment">No shortcuts (within reason)</li>
+            <li class>Functional Programming</li>
+            <li class>Good Project & File Structure</li>
+            <li class>Unit tests & Continuous Integration Tool</li>
+            <li class>Publish to npm</li>
+            <li class>Promises across the board</li>
+            <li class>No shortcuts (within reason)</li>
           </ul>
+        </section>
+        <section>
+          <h2>Functional Programming</h2>
+          <ul>
+            <li class="fragment">Abstract data into functions</li>
+            <li class="fragment">Instead of using loops, use .map, .reduce, .filter </li>
+            <li class="fragment">Create reusable pure functions</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Good Project & File Structure</h2>
+          <li class="fragment">Split up into different files or folders.</li>
+          <aside class="notes">Objective was to make it easy to read and manage.</aside>
+        </section>
+        <section>
+          <h2>Unit tests & Continuous Integration</h2>
+          <p style="text-align:left; padding-left: 14%;">Using CircleCI, build passes if:</p>
+          <ul>
+            <li class="fragment">Code is well-formatted (beautifier)</li>
+            <li class="fragment">Code is linted (Eslint)</li>
+            <li class="fragment">Code passes Mocha Unit Tests (its not broken)</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Promises only</h2>
+          <p>Using Library q.</p>
+        </section>
+        <section>
+          <h2>No shortcuts (within reason)</h2>
+        </section>
+        <section>
+          <h2>Publish to NPM</h2>
         </section>
         <section>
           <h2>Coincidentally: 1 commit a day</h2>
@@ -175,14 +206,15 @@
           <h2>New features vs necessary improvements</h2>
           <aside class="notes">explain scope creep and how companies HATE clients who have it and find ways to eliminate it. This case is tricky because you're also the client.</aside>
           <ul>
-            <li class="fragment">ES6?</li>
-            <li class="fragment">Front-end component?</li>
+            <li class="fragment">ES6</li>
+            <li class="fragment">Front-end component</li>
             <li class="fragment">Detect & display line numbers</li>
             <li class="fragment">Detect & display multiple requires</li>
             <li class="fragment">Detect and allow users to add version number</li>
             <li class="fragment">More powerful promise library?</li>
             <li class="yellow fragment"> --save-dev --save choose option </li>
             <li class="yellow fragment">Avoid node_modules directory</li>
+            <li class="yellow fragment">Revealing Module Pattern</li>
             <li class="fragment">Avoid all .gitignore files</li>
           </ul>
         </section>
